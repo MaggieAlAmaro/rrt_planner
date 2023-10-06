@@ -7,7 +7,7 @@ The `rrt_planner` ROS package provides a framework to implement sampling based m
 ## Install Dependencies and Build
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/irob-labs-ist/rrt_planner.git
+git clone https://github.com/MaggieAlAmaro/rrt_planner.git
 cd .. && rosdep install --from-paths src --ignore-src -r -y
 catkin_make
 source devel/setup.bash

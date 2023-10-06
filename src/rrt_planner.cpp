@@ -56,16 +56,28 @@ namespace rrt_planner {
         /**************************
          * Implement your code here
          **************************/
+        float nearest_dist = computeDistance(nodes_[0].pos, point);
+        float nearest_node_index = 0;
+         for (int i = 1; i < nodes_.size(); i++) {
+            float dist_point_node = computeDistance(nodes_[i].pos, point);
+            if (dist_point_node < nearest_dist){
+                nearest_dist = dist_point_node;
+                nearest_node_index = i;
+            }
+         }
+         return nearest_node_index; // or node_[nearest_node_index].node_id
 
     }
 
     void RRTPlanner::createNewNode(const double* pos, int parent_node_id) {
 
-        Node new_node;
+        Node new_node(pos, nodes_.size() + 1, parent_node_id); // not sure how to give the pos and the node_id
 
         /**************************
          * Implement your code here
          **************************/
+
+
 
         nodes_.emplace_back(new_node);
         
@@ -77,8 +89,8 @@ namespace rrt_planner {
          * Implement your code here
          **************************/
 
-        rand_point_[0] = // ... ;
-        rand_point_[1] = // ... ;
+        rand_point_[0] = random_double_x.generate();
+        rand_point_[1] = random_double_y.generate();
 
         return rand_point_;
     }

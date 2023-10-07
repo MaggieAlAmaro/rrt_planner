@@ -71,7 +71,7 @@ namespace rrt_planner {
 
     void RRTPlanner::createNewNode(const double* pos, int parent_node_id) {
 
-        Node new_node(pos, nodes_.size() + 1, parent_node_id); // not sure how to give the pos and the node_id
+        Node new_node(pos, nodes_.size(), parent_node_id); // not sure how to give the pos and the node_id
 
         /**************************
          * Implement your code here
@@ -101,8 +101,23 @@ namespace rrt_planner {
          * Implement your code here
          **************************/
 
-        candidate_point_[0] = // ... ;
-        candidate_point_[1] = // ... ;
+
+        // Not sure what is wanted here? 
+        // Because the point is random so could be really far. So is the parameter step the longest distance allowed between nodes?
+        // Or else candidate_point is just euqals to point random so what is the goal of having a function
+
+
+        double distance_node_prand = computeDistance(point_nearest, point_rand);
+
+        if(distance_node_prand < params_.step){
+            candidate_point_[0] = point_nearest[0];
+            candidate_point_[1] = point_nearest[0];
+        }
+        else { 
+            double theta = atan2(point_rand[1]-point_nearest[1], point_rand[0] - point_nearest[0]);
+            candidate_point_[0] = point_nearest[0] + params_.step*cos(theta);
+            candidate_point_[1] = point_nearest[1] + params_.step*sin(theta);
+        }
 
         return candidate_point_;
     }
